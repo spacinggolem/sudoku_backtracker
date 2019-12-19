@@ -1,20 +1,17 @@
-import pygame
 
-board = [
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 3, 6, 0, 0, 0, 0, 0],
-    [0, 7, 0, 0, 9, 0, 2, 0, 0],
-    [0, 7, 0, 0, 9, 0, 2, 0, 0],
-    [0, 5, 0, 0, 0, 7, 0, 0, 0],
-    [0, 0, 0, 0, 4, 5, 7, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 3, 0],
-    [0, 0, 8, 5, 0, 0, 0, 1, 0],
-    [0, 9, 0, 0, 0, 0, 4, 0, 0]
-]  # 0 is an empty cell
 
 class Board():
-    def __init__(self, bo: list):
+    def __init__(self, height, width, cell_size, bo: list):
+        self.height = height
+        self.width = width
+        self.cell_size = cell_size
         self.board = bo
+
+    def print_board_gui(self):
+        for row in range(self.height):
+            for col in range(self.width):
+                rect = pygame.Rect(col*self.cell_size, row*self.cell_size, self.cell_size, self.cell_size)
+                pygame.draw.rect(window, color, rect)
 
     def print_board(self):
         for row in range(len(self.board)):
@@ -80,21 +77,3 @@ class Board():
                 self.board[row][col] = 0
 
         return False
-        
-class cell():
-    def __init__(self, x, y, num):
-        self.x = x
-        self.y = y
-        self.num = num
-
-    def is_empty(self):
-        if self.num == 0:
-            return True
-        return False
-
-'''
-new_board = Board(board)
-new_board.print_board()
-new_board.solve()
-new_board.print_board()
-'''
